@@ -13,7 +13,7 @@ void rut::Deque::pop_front()
 {
 	if (this->size <= 0)
 	{
-		throw std::out_of_range("âûõîä çà ïðåäåëû äýêà");
+		throw std::out_of_range("Ð²Ñ‹Ñ…Ð¾Ð´ Ð·Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ñ‹ Ð´ÑÐºÐ°");
 	}
 	Node* temp = this->head;
 	if (this->head == this->tail)
@@ -32,7 +32,7 @@ void rut::Deque::pop_back()
 {
 	if (this->size <= 0)
 	{
-		throw std::out_of_range("âûõîä çà ïðåäåëû äýêà");
+		throw std::out_of_range("Ð²Ñ‹Ñ…Ð¾Ð´ Ð·Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ñ‹ Ð´ÑÐºÐ°");
 	}
 	Node* temp = this->tail;
 	if (this->head == this->tail)
@@ -83,7 +83,7 @@ int rut::Deque::front()
 {
 	if (this->size == 0)
 	{
-		throw std::out_of_range("âûõîä çà ãðàíèöû äýêà");
+		throw std::out_of_range("Ð²Ñ‹Ñ…Ð¾Ð´ Ð·Ð° Ð³Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð´ÑÐºÐ°");
 	}
 	return this->head->data;
 }
@@ -92,7 +92,7 @@ int rut::Deque::back()
 {
 	if (this->size == 0)
 	{
-		throw std::out_of_range("âûõîä çà ãðàíèöû äýêà");
+		throw std::out_of_range("Ð²Ñ‹Ñ…Ð¾Ð´ Ð·Ð° Ð³Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð´ÑÐºÐ°");
 	}
 	return this->tail->data;
 }
