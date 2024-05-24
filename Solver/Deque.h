@@ -27,5 +27,7 @@ namespace rut
 		int front();
 
 		int back();
+		
+		bool IsEmpty();
 	};
 }

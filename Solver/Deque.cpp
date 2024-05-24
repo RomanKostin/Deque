@@ -3,7 +3,7 @@
 
 rut::Deque::~Deque()
 {
-	while (!(this->size == 0))
+	while (!(IsEmpty()))
 	{
 		pop_front();
 	}
@@ -11,7 +11,7 @@ rut::Deque::~Deque()
 
 void rut::Deque::pop_front()
 {
-	if (this->size <= 0)
+	if (IsEmpty())
 	{
 		throw std::out_of_range("выход за пределы дэка");
 	}
@@ -30,7 +30,7 @@ void rut::Deque::pop_front()
 
 void rut::Deque::pop_back()
 {
-	if (this->size <= 0)
+	if (IsEmpty())
 	{
 		throw std::out_of_range("выход за пределы дэка");
 	}
@@ -50,7 +50,7 @@ void rut::Deque::pop_back()
 void rut::Deque::push_front(const int value)
 {
 	Node* frontNode = new Node(value);
-	if (this->size == 0)
+	if (IsEmpty())
 	{
 		this->head = this->tail = frontNode;
 	}
@@ -66,7 +66,7 @@ void rut::Deque::push_front(const int value)
 void rut::Deque::push_back(const int value)
 {
 	Node* backNode = new Node(value);
-	if (this->size == 0)
+	if (IsEmpty())
 	{
 		this->head = this->tail = backNode;
 	}
@@ -81,7 +81,7 @@ void rut::Deque::push_back(const int value)
 
 int rut::Deque::front()
 {
-	if (this->size == 0)
+	if (IsEmpty())
 	{
 		throw std::out_of_range("выход за границы дэка");
 	}
@@ -90,9 +90,14 @@ int rut::Deque::front()
 
 int rut::Deque::back()
 {
-	if (this->size == 0)
+	if (IsEmpty())
 	{
 		throw std::out_of_range("выход за границы дэка");
 	}
 	return this->tail->data;
+}
+
+bool rut::Deque::IsEmpty()
+{
+	return this->size == 0;
 }
