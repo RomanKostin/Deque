@@ -1,5 +1,8 @@
 #pragma once
+#include<iostream>
 #include "Node.h"
+#include <initializer_list>
+
 namespace rut
 {
 	class Deque
@@ -14,7 +17,15 @@ namespace rut
 
 		Deque() : head(nullptr), tail(nullptr), size(0) {}
 
+		Deque(std::initializer_list<int> list);
+
 		~Deque();
+
+		Deque& operator=(const Deque& other);
+		
+		friend std::ostream& operator << (std::ostream & output, const Deque & deque);
+
+		friend std::istream& operator >> (std::istream& input, Deque& deque);
 
 		void pop_front();
 

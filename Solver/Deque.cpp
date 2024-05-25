@@ -1,12 +1,34 @@
 #include "Deque.h"
-#include<iostream>
+
+rut::Deque::Deque(std::initializer_list<int> list)
+{
+	for (int x : list)
+	{
+		push_back(x);
+	}
+}
 
 rut::Deque::~Deque()
 {
+    while (!(IsEmpty())) 
+    {
+		pop_front();
+    }
+}
+
+rut::Deque& rut::Deque::operator=(const Deque& other)
+{
+	Node* temp = other.head;
 	while (!(IsEmpty()))
 	{
 		pop_front();
 	}
+	while (temp != nullptr)
+	{
+		push_back(temp->data);
+		temp = temp->next;
+	}
+	return *this;
 }
 
 void rut::Deque::pop_front()
@@ -15,16 +37,15 @@ void rut::Deque::pop_front()
 	{
 		throw std::out_of_range("выход за пределы дэка");
 	}
-	Node* temp = this->head;
 	if (this->head == this->tail)
 	{
 		this->head = this->tail = nullptr;
 	}
 	else
 	{
+		this->head = this->head->next;
 		this->head->prev = nullptr;
 	}
-	delete temp;
 	--this->size;
 }
 
@@ -34,16 +55,15 @@ void rut::Deque::pop_back()
 	{
 		throw std::out_of_range("выход за пределы дэка");
 	}
-	Node* temp = this->tail;
 	if (this->head == this->tail)
 	{
 		this->head = this->tail = nullptr;
 	}
 	else
 	{
+		this->tail = this->tail->prev;
 		this->tail->next = nullptr;
 	}
-	delete temp;
 	--this->size;
 }
 
@@ -100,4 +120,30 @@ int rut::Deque::back()
 bool rut::Deque::IsEmpty()
 {
 	return this->size == 0;
+}
+
+std::ostream& rut::operator<<(std::ostream& output, const Deque& deque)
+{
+	Deque temp = deque;
+	while (!(temp.IsEmpty()))
+	{
+		output << temp.front()<<std::endl;
+		temp.pop_front();
+	}
+	return output;
+}
+
+std::istream& rut::operator>>(std::istream& input, Deque& deque)
+{
+	std::cout << "press ctrl z to stop" << std::endl;
+	while (!(deque.IsEmpty()))
+	{
+		deque.pop_front();
+	}
+	int value;
+	while (input>>value)
+	{
+		deque.push_back(value);
+	}
+	return input;
 }

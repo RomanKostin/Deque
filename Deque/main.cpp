@@ -3,8 +3,13 @@
 
 int main()
 {
-	rut::Deque deq;
-	deq.push_front(1);
-	std::cout << deq.front();
+	rut::Deque deq, list{ 1,2,3 };
+	deq.push_front(7);
+	deq.push_front(4);
+	rut::Deque copy=list;
+	std::cout << list;
+	std::cout << copy;
+	std::cin >> deq;
+	std::cout << std::endl << deq;
 	return 0;
 }
