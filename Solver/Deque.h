@@ -15,17 +15,21 @@ namespace rut
 
 	public:
 
-		Deque() : head(nullptr), tail(nullptr), size(0) {}
+		Deque() : head{ nullptr }, tail{ nullptr }, size{ 0 } {}
 
 		Deque(std::initializer_list<int> list);
+
+		Deque(const Deque& other);
+
+		Deque(Deque&& other) noexcept;
 
 		~Deque();
 
 		Deque& operator=(const Deque& other);
-		
-		friend std::ostream& operator << (std::ostream & output, const Deque & deque);
 
-		friend std::istream& operator >> (std::istream& input, Deque& deque);
+		Deque& operator = (Deque&& other) noexcept;
+
+		friend std::ostream& operator << (std::ostream & output, const Deque & deque);
 
 		void pop_front();
 

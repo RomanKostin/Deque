@@ -8,6 +8,22 @@ rut::Deque::Deque(std::initializer_list<int> list)
 	}
 }
 
+rut::Deque::Deque(const Deque& other)
+{
+	Node* temp = other.head;
+	while (temp != nullptr)
+	{
+		push_back(temp->data);
+		temp = temp->next;
+	}
+}
+
+rut::Deque::Deque(Deque&& other) noexcept : head{ other.head }, tail{ other.tail }, size{other.size}
+{
+	other.head = other.tail = nullptr;
+	other.size = 0;
+}
+
 rut::Deque::~Deque()
 {
     while (!(IsEmpty())) 
@@ -18,16 +34,26 @@ rut::Deque::~Deque()
 
 rut::Deque& rut::Deque::operator=(const Deque& other)
 {
-	Node* temp = other.head;
-	while (!(IsEmpty()))
+	Deque temp(other);
+	this->head = temp.head;
+	this->tail = temp.tail;
+	return *this;
+}
+
+rut::Deque& rut::Deque::operator=(Deque&& other) noexcept
+{
+	if (this != &other)
 	{
-		pop_front();
+		while (!(IsEmpty()))
+		{
+			pop_front();
+		}
 	}
-	while (temp != nullptr)
-	{
-		push_back(temp->data);
-		temp = temp->next;
-	}
+	this->head = other.head;
+	this->tail = other.tail;
+	this->size = other.size;
+	other.head = other.tail = nullptr;
+	other.size = 0;
 	return *this;
 }
 
@@ -131,19 +157,4 @@ std::ostream& rut::operator<<(std::ostream& output, const Deque& deque)
 		temp.pop_front();
 	}
 	return output;
-}
-
-std::istream& rut::operator>>(std::istream& input, Deque& deque)
-{
-	std::cout << "press ctrl z to stop" << std::endl;
-	while (!(deque.IsEmpty()))
-	{
-		deque.pop_front();
-	}
-	int value;
-	while (input>>value)
-	{
-		deque.push_back(value);
-	}
-	return input;
 }
