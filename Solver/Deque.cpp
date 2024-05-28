@@ -1,5 +1,5 @@
 #include "Deque.h"
-
+#include <utility>
 rut::Deque::Deque(std::initializer_list<int> list)
 {
 	for (int x : list)
@@ -34,9 +34,13 @@ rut::Deque::~Deque()
 
 rut::Deque& rut::Deque::operator=(const Deque& other)
 {
-	Deque temp(other);
-	this->head = temp.head;
-	this->tail = temp.tail;
+	if (this != &other)
+	{
+		Deque temp(other);
+		std::swap(this->head, temp.head);
+		std::swap(this->tail, temp.tail);
+		std::swap(this->size, temp.size);
+	}
 	return *this;
 }
 
