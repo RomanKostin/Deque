@@ -2,13 +2,13 @@
 #include <utility>
 rut::Deque::Deque(std::initializer_list<int> list)
 {
-	for (int x : list)
+	for (auto& x : list)
 	{
 		push_back(x);
 	}
 }
 
-rut::Deque::Deque(const Deque& other)
+rut::Deque::Deque(const Deque& other) :Deque()
 {
 	Node* temp = other.head;
 	while (temp != nullptr)
@@ -48,9 +48,9 @@ rut::Deque& rut::Deque::operator=(Deque&& other) noexcept
 {
 	if (this != &other)
 	{
-		while (!(IsEmpty()))
+		if (this == &other)
 		{
-			pop_front();
+			return *this;
 		}
 	}
 	this->head = other.head;
